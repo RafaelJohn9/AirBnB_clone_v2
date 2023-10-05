@@ -39,7 +39,7 @@ def do_deploy(archive_path):
 
         # symbolic link
         run("sudo rm -rf /data/web_static/current")
-        run(f'ln -fs /data/web_static/releases/{name}\
-                /web_static /data/web_static/current')
+        run(f'ln -fs /data/web_static/releases/{name}/web_static\
+                /data/web_static/current')
 
     return True
