@@ -2,7 +2,7 @@
 # a bash script that sets up your web servers for the deployment of web_static
 
 # checks if nginx is intalled
-if [[ ! $(dpkg -l | grep -i "nginx") ]]; then
+if ! dpkg -l | grep -qi "nginx"; then
 	sudo apt-get -y update
 	sudo apt-get -y install nginx
 fi
@@ -50,10 +50,6 @@ sudo ln -sf '/data/web_static/releases/test/' '/data/web_static/current'
 
 # changing the dir ownership
 sudo chown -R ubuntu:ubuntu '/data'
-
-# Use sed to replace the existing location block
-nginx_config="/etc/nginx/sites-available/default"
-nginx_alias="location /hbnb_static/ {\n\t\talias /data/web_static/current/;\n}"
 
 # Use sed to locate the 'server {' block and replace the 'location' block
 old="server_name _;"
