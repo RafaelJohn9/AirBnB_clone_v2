@@ -29,7 +29,8 @@ def deploy():
     the function used in automation
     """
     archive = do_pack()
-    if archive == None:
+    if archive is None:
         return False
+    archive = str(archive)
 
     return (do_deploy(archive))
