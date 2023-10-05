@@ -49,7 +49,7 @@ sudo ln -sf '/data/web_static/releases/test/' '/data/web_static/current'
 
 
 # changing the dir ownership
-chown -R ubuntu:ubuntu '/data'
+sudo chown -R ubuntu:ubuntu '/data'
 
 # Use sed to replace the existing location block
 nginx_config="/etc/nginx/sites-available/default"
