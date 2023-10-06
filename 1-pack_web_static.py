@@ -20,7 +20,7 @@ def do_pack():
     source = "web_static/*"
     archiveName = f"web_static_{timestamp}.tgz"
 
-    result = local(f"tar -cvzf versions/{archiveName} {source}")
+    result = local(f"tar -cvzf versions/{archiveName} -C {source}")
 
     if result.failed:
         return None
