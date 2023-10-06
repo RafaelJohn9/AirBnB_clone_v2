@@ -30,7 +30,7 @@ def do_deploy(archive_path):
     name = extBreak[0]
 
     cmd1 = f"sudo tar -xzf {remote_dest}/{dirBreak[-1]}\
-            -C /data/web_static/releases/{name}"
+            -C /data/web_static/releases/{name} --strip-components 1"
     for host in env.hosts:
         put(local_path=archive_path, remote_path=remote_dest)
         run(f'mkdir -p /data/web_static/releases/{name}')
