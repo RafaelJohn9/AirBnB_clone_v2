@@ -5,7 +5,7 @@ a fabric script (based on 1-pack_web_static.py)
 that distributes an archive to your web servers
 using the function do_deploy
 """
-from fabric.api import env, run, put, task
+from fabric.api import *
 from os import path
 import sys
 
@@ -39,10 +39,10 @@ def do_deploy(archive_path):
             run(cmd1)
             run(f'rm -rf {remote_dest}/{dirBreak[-1]}')
 
-        # symbolic link
-        run("sudo rm -rf /data/web_static/current")
-        run(f'ln -fs /data/web_static/releases/{name}/web_static\
-                /data/web_static/current')
+            # symbolic link
+            run("sudo rm -rf /data/web_static/current")
+            run(f'ln -fs /data/web_static/releases/{name}\
+                    /data/web_static/current')
         return True
     except Exception:
         return (false)

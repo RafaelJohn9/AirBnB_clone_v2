@@ -17,7 +17,7 @@ def do_pack():
         local('mkdir -p versions')
 
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    source = "web_static"
+    source = "web_static/*"
     archiveName = f"web_static_{timestamp}.tgz"
 
     result = local(f"tar -cvzf versions/{archiveName} {source}")
