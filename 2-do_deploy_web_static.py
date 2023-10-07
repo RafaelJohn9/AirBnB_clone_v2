@@ -18,28 +18,31 @@ def do_deploy(archive_path):
     """
     a fabric script that distributes an archive to your web servers
     """
-    if not path.exists(archive_path):
-        return False
-    remote_dest = "/tmp"
+    try:
+        if not path.exists(archive_path):
+            return False
+        remote_dest = "/tmp"
 
-    # breaking down archive_path name
-    dirBreak = archive_path.split("/")
+        # breaking down archive_path name
+        dirBreak = archive_path.split("/")
 
-    # dirBreak[-1] contains name of the file
-    extBreak = dirBreak[-1].split(".")
-    name = extBreak[0]
+        # dirBreak[-1] contains name of the file
+        extBreak = dirBreak[-1].split(".")
+        name = extBreak[0]
 
-    cmd1 = f"sudo tar -xzf {remote_dest}/{dirBreak[-1]}\
-            -C /data/web_static/releases/{name} --strip-components 1"
-    for host in env.hosts:
-        put(local_path=archive_path, remote_path=remote_dest)
-        run(f'mkdir -p /data/web_static/releases/{name}')
-        run(cmd1, quiet=True)
-        run(f'rm -rf {remote_dest}/{dirBreak[-1]}')
+        cmd1 = f"sudo tar -xzf {remote_dest}/{dirBreak[-1]}\
+                -C /data/web_static/releases/{name} --strip-components 1"
+
+        for host in env.hosts:
+            put(local_path=archive_path, remote_path=remote_dest)
+            run(f'mkdir -p /data/web_static/releases/{name}')
+            run(cmd1)
+            run(f'rm -rf {remote_dest}/{dirBreak[-1]}')
 
         # symbolic link
         run("sudo rm -rf /data/web_static/current")
         run(f'ln -fs /data/web_static/releases/{name}/web_static\
                 /data/web_static/current')
-
-    return True
+        return True
+    except Exception:
+        return (false)
