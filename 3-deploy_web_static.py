@@ -18,9 +18,7 @@ do_pack = module_1.do_pack
 module_name_2 = '2-do_deploy_web_static'
 module_2 = __import__(module_name_2)
 do_deploy = module_2.do_deploy
-
-# set the list of web server ip addresses
-env.hosts = ['18.206.207.45', '100.25.109.79']
+archive = do_pack()
 
 
 @task
@@ -28,7 +26,8 @@ def deploy():
     """
     the function used in automation
     """
-    archive = do_pack()
+    global archive
+
     if archive is None:
         return False
     archive = str(archive)

@@ -33,16 +33,15 @@ def do_deploy(archive_path):
         cmd1 = f"sudo tar -xzf {remote_dest}/{dirBreak[-1]}\
                 -C /data/web_static/releases/{name} --strip-components 1"
 
-        for host in env.hosts:
-            put(local_path=archive_path, remote_path=remote_dest)
-            run(f'mkdir -p /data/web_static/releases/{name}')
-            run(cmd1)
-            run(f'rm -rf {remote_dest}/{dirBreak[-1]}')
+        put(local_path=archive_path, remote_path=remote_dest)
+        run(f'mkdir -p /data/web_static/releases/{name}')
+        run(cmd1)
+        run(f'rm -rf {remote_dest}/{dirBreak[-1]}')
 
-            # symbolic link
-            run("sudo rm -rf /data/web_static/current")
-            run(f'ln -fs /data/web_static/releases/{name}\
-                    /data/web_static/current')
+        # symbolic link
+        run("sudo rm -rf /data/web_static/current")
+        run(f'ln -fs /data/web_static/releases/{name}\
+                /data/web_static/current')
         return True
     except Exception:
-        return (false)
+        return False 
