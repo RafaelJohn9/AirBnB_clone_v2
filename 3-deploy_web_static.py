@@ -19,7 +19,7 @@ module_name_2 = '2-do_deploy_web_static'
 module_2 = __import__(module_name_2)
 do_deploy = module_2.do_deploy
 
-# archive file  
+# archiving contents
 archive = do_pack()
 
 
