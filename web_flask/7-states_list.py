@@ -7,6 +7,7 @@ from models import storage
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
+
 @app.route('/states_list')
 def route_state():
     """ a route to the state """
@@ -15,6 +16,7 @@ def route_state():
     sorted_states = sorted(states, key=lambda state: state.name)
 
     return render_template("7-states_list.html", states=states)
+
 
 @app.teardown_appcontext
 def teardown_db(exception):
