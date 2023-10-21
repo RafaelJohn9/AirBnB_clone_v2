@@ -24,8 +24,10 @@ class State(BaseModel, Base):
             with state_id equals to the current State.id (FileStorage)
             """
             from models import storage
+            from models.city import City
+
             result = []
-            for city in storage.all("City").values():
+            for city in storage.all(City).values():
                 if city.state_id == self.id:
                     result.append(city)
             return result
