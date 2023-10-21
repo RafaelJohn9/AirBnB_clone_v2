@@ -22,8 +22,11 @@ def cities_in_state(state_id):
         states = storage.all(State)
         key = "State."
         key += state_id
-        state = states[key]
-        return render_template("9-states.html", myObject=state)
+        try:
+            state = states[key]
+            return render_template("9-states.html", myObject=state)
+        except Exception:
+            return render_template("9-states.html", myObject=None)
 
 
 @app.teardown_appcontext
