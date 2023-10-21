@@ -12,10 +12,10 @@ app.url_map.strict_slashes = False
 def route_state():
     """ a route to the state """
     from models.state import State
-    states = storage.all(State).values()
+    states = storage.all(State)
     sorted_states = sorted(states, key=lambda state: state.name)
 
-    return render_template("7-states_list.html", states=states)
+    return render_template("7-states_list.html", states=sorted_states)
 
 
 @app.teardown_appcontext
