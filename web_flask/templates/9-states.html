@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<HTML lang="en">
+    <HEAD>
+        <TITLE>HBNB</TITLE>
+    </HEAD>
+    <BODY>
+        <H1>States</H1>
+		{% if myObject.__class__.__name__ == 'State' %}
+		   <UL>
+		   {% for city in myObject.cities | sort(attribute='name') %}
+		       <LI>{{ city.id }}: <B>{{ city.name }}</B></LI>
+		   {% endfor %}
+		   </UL>
+		{% else %}
+		   <UL>
+		   {% for state in myObject %}
+		   <LI>{{ state.id }}: <B>{{ state.name }}</B></LI>
+		   {% endfor %}
+		   </UL>
+		{% endif %}
+    </BODY>
+</HTML>
